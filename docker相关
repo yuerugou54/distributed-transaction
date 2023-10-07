@@ -1,0 +1,20 @@
+java项目打包成docker的方法：https://zhuanlan.zhihu.com/p/478905946
+mvn spring-boot:build-image docker default image name docker.io/xa-atomikos:1.0-SNAPSHOT:1.0-SNAPSHOT
+
+docker中启动nginx https://blog.csdn.net/weixin_47061482/article/details/131146661
+
+docker run -p 9090:8081 -t xa-atomikos:1.0-SNAPSHOT --network my-test-net --network-alias bank-one 
+docker run -p 9091:8081 -t xa-atomikos:1.0-SNAPSHOT --network my-test-net --network-alias bank-two
+
+
+docker cp myNginx:/etc/nginx/nginx.conf /Users/mxd/Documents/docker-mnt/nginx/nginx.conf
+docker cp myNginx:/etc/nginx/conf.d/default.conf /Users/mxd/Documents/docker-mnt/nginx/conf.d/default.conf
+
+docker run --name myNginx -p 8080:80 -v /Users/mxd/Documents/docker-mnt/nginx/nginx.conf:/etc/nginx/nginx.conf -v /Users/mxd/Documents/docker-mnt/nginx/conf.d:/etc/nginx/conf.d -v /Users/mxd/Documents/docker-mnt/nginx/logs:/var/log/nginx -v /Users/mxd/Documents/docker-mnt/nginx/html:/usr/share/nginx/html -d nginx
+
+容器组网：https://www.yiibai.com/docker/network_connect.html
+docker network connect my-test-net 7c25b8dc6da423dae14f0a1782eb89520fa7328c911b794b5a28a74d18ceffc3
+
+
+172.18.0.2 bank-one
+172.18.0.2 bank-two
