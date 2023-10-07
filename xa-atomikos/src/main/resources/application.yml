@@ -1,0 +1,34 @@
+server:
+  port: ${SERVER_PORT:8081}
+
+spring:
+  datasource:
+    initialization-mode: always
+    url: jdbc:h2:file:/tmp/data
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: false
+        format_sql: false
+bank:
+  code: ${BANK_CODE:BAN_ONE}
+  name: ${BANK_NAME:Bank ONE Coperation}
+bankcode-url:
+  map:
+    "BAN_ONE" : "http://bank-one"
+    "BAN_TWO" : "http://bank-two"
+
+logging:
+  level:
+    org.springframework.orm.jpa: DEBUG
+    org.springframework.transaction: DEBUG

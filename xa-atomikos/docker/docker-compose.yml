@@ -1,0 +1,47 @@
+version: '3'
+services:
+  bank-one:
+
+    image: docker.io/library/xa-atomikos:1.1-SNAPSHOT
+    networks:
+      my-test-net:
+#          ipv4_address: 172.18.0.4
+    environment:
+      - "SERVER_PORT=8081"
+      - "BANK_CODE=BAN_ONE"
+      - "BANK_NAME=BANK ONE"
+    ports:
+      - "9090:8081"
+    volumes:
+      - "/tmp/one_data:/tmp/data"
+    extra_hosts:
+      - "bank-one:172.18.0.2"
+      - "bank-two:172.18.0.2"
+      - "bank-three:172.18.0.2"
+      - "bank-four:172.18.0.2"
+      - "bank-five:172.18.0.2"
+      - "bank-six:172.18.0.2"
+
+  bank-two:
+
+    image: docker.io/library/xa-atomikos:1.1-SNAPSHOT
+    networks:
+      my-test-net:
+        #ipv4_address: 172.18.0.5
+    environment:
+      - "SERVER_PORT=8081"
+      - "BANK_CODE=BAN_TWO"
+      - "BANK_NAME=BANK TWO"
+    ports:
+      - "9091:8081"
+    volumes:
+      - "/tmp/sec_data:/tmp/data"
+    extra_hosts:
+      - "bank-one:172.18.0.2"
+      - "bank-two:172.18.0.2"
+      - "bank-three:172.18.0.2"
+      - "bank-four:172.18.0.2"
+      - "bank-five:172.18.0.2"
+      - "bank-six:172.18.0.2"
+networks:
+   my-test-net: {}

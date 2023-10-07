@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "af5f94a2-a5d7-484c-9ce7-53903ae550e8",
+		"name": "my-bank-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Account by Number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/account?account-number=ONE-1112",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"account"
+					],
+					"query": [
+						{
+							"key": "account-number",
+							"value": "ONE-1112"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Account - Bank One",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"number\": \"ONE-1112\",\n  \"name\": \"CAGE\",\n  \"currencyCode\": \"SGD\",\n  \"balance\": 1000.00\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Account - Bank Two",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"number\": \"TWO-2223\",\n  \"name\": \"XXXX\",\n  \"currencyCode\": \"SGD\",\n  \"balance\": 1000.00\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer Bank One to Bank Two",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"accountNumber\": \"TWO-2223\",\n  \"bankCode\": \"BAN_TWO\",\n  \"amount\": 1.99\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/account/ONE-1112/direct-transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"account",
+						"ONE-1112",
+						"direct-transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer Bank Two to Bank One",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"accountNumber\": \"ONE-1112\",\n  \"bankCode\": \"BAN_ONE\",\n  \"amount\": 1.99\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/account/TWO-2223/direct-transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"account",
+						"TWO-2223",
+						"direct-transfer"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
